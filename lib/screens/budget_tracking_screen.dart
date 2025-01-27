@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-
 class BudgetTrackingScreen extends StatefulWidget {
   const BudgetTrackingScreen({super.key, required Map<String, double> expensesByCategory, required double totalBudget, required Map budgets, required double totalExpenses});
-
 
   @override
   // ignore: library_private_types_in_public_api
   _BudgetTrackingScreenState createState() => _BudgetTrackingScreenState();
 }
 
-
 class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
   late Map<String, double> _expensesByCategory;
   late Map<String, double> _budgets;
-
 
   @override
   void initState() {
@@ -26,21 +22,17 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     _loadData();
   }
 
-
   /// Load budgets and expenses from SharedPreferences
   Future<void> _loadData() async {
     final prefs = await SharedPreferences.getInstance();
 
-
     final expensesString = prefs.getString('expensesByCategory');
     final budgetsString = prefs.getString('budgets');
-
 
     setState(() {
       _expensesByCategory = expensesString != null
           ? Map<String, double>.from(json.decode(expensesString))
           : {};
-
 
       _budgets = budgetsString != null
           ? Map<String, double>.from(json.decode(budgetsString))
@@ -48,14 +40,12 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     });
   }
 
-
   /// Save budgets and expenses to SharedPreferences
   Future<void> _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('expensesByCategory', json.encode(_expensesByCategory));
     await prefs.setString('budgets', json.encode(_budgets));
   }
-
 
   /// Add a new expense
   void _addExpense(String category, double amount) {
@@ -69,7 +59,6 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     _saveData();
   }
 
-
   /// Set or update a budget for a category
   void _setBudget(String category, double newBudget) {
     setState(() {
@@ -82,12 +71,10 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     _saveData();
   }
 
-
   /// Show a dialog to set a new budget
   Future<void> _showSetBudgetDialog() async {
     final categoryController = TextEditingController();
     final budgetController = TextEditingController();
-
 
     await showDialog(
       context: context,
@@ -118,7 +105,6 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
                 final category = categoryController.text.trim();
                 final budget = double.tryParse(budgetController.text);
 
-
                 if (category.isNotEmpty && budget != null) {
                   _setBudget(category, budget);
                   Navigator.pop(context);
@@ -132,13 +118,11 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     );
   }
 
-/// Show a dialog to add an expense
+  /// Show a dialog to add an expense
   Future<void> _showAddExpenseDialog() async {
     String? selectedCategory;
     final amountController = TextEditingController();
-
-
-    await showDialog(
+await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -177,7 +161,6 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
               onPressed: () {
                 final amount = double.tryParse(amountController.text);
 
-
                 if (selectedCategory != null && amount != null) {
                   _addExpense(selectedCategory!, amount);
                   Navigator.pop(context);
@@ -191,28 +174,37 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
     );
   }
 
+  /// Clear all budgets and expenses
+  Future<void> _clearData() async {
+    setState(() {
+      _expensesByCategory.clear();
+      _budgets.clear();
+    });
+    _saveData();
+  }
 
   /// Get a summary of total spent vs. total budget
   double _getTotalBudget() {
     return _budgets.values.fold(0.0, (sum, item) => sum + item);
   }
 
-
   double _getTotalSpent() {
     return _expensesByCategory.values.fold(0.0, (sum, item) => sum + item);
   }
-
 
   @override
   Widget build(BuildContext context) {
     final totalBudget = _getTotalBudget();
     final totalSpent = _getTotalSpent();
 
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Budget Tracking'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: _clearData, // Clear all budgets and expenses
+          ),
           IconButton(
             icon: const Icon(Icons.add_chart),
             onPressed: _showSetBudgetDialog,
@@ -247,7 +239,7 @@ class _BudgetTrackingScreenState extends State<BudgetTrackingScreen> {
                     children: _budgets.keys.map((category) {
                       final spent = _expensesByCategory[category] ?? 0.0;
                       final budget = _budgets[category]!;
-                      return Card(
+return Card(
                         child: ListTile(
                           title: Text(category),
                           subtitle: Column(
