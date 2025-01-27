@@ -12,16 +12,16 @@ This project is a smart expense monitoring tool designed specifically for comput
 
 ### **Group Members Information**
 - **Name**: NUR AQILAH BINTI ABDUL RAZAK 
-- **Student ID**: 2023239326  
+  **Student ID**: 2023239326  
 
 - **Name**: NOR ZALIAH BINTI ABDULLAH 
-- **Student ID**: 2023466022  
+  **Student ID**: 2023466022  
 
 - **Name**: NUR AYUNI BINTI A-AZIZ 
-- **Student ID**: 2023261404  
+  **Student ID**: 2023261404  
 
 - **Name**: NUR FASIHAH NAJWA BINTI MOHD ASRI
-- **Student ID**: 2023213382  
+  **Student ID**: 2023213382  
 
 ---
 
