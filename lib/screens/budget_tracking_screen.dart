@@ -219,7 +219,7 @@ await showDialog(
             child: ListTile(
               title: const Text('Overall Budget Summary'),
               subtitle: Text(
-                'Total Budget: \$${totalBudget.toStringAsFixed(2)}\nTotal Spent: \$${totalSpent.toStringAsFixed(2)}',
+                'Total Budget: \RM${totalBudget.toStringAsFixed(2)}\nTotal Spent: \RM${totalSpent.toStringAsFixed(2)}',
               ),
               trailing: Text(
                 totalSpent > totalBudget ? 'Over Budget!' : 'On Track',
@@ -253,7 +253,7 @@ return Card(
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Spent: \$${spent.toStringAsFixed(2)} / Budget: \$${budget.toStringAsFixed(2)}',
+                                'Spent: \RM${spent.toStringAsFixed(2)} / Budget: \RM${budget.toStringAsFixed(2)}',
                               ),
                             ],
                           ),
