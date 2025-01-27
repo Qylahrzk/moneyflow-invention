@@ -11,17 +11,20 @@ This project is a smart expense monitoring tool designed specifically for comput
 - **Lecturer Name**: SIR MUHAMMAD ATIF BIN RAMLAN 
 
 ### **Group Members Information**
-- **Name**: NUR AQILAH BINTI ABDUL RAZAK 
-  **Student ID**: 2023239326  
+1. **Name**: NUR AQILAH BINTI ABDUL RAZAK 
+-  **Student ID**: 2023239326  
 
-- **Name**: NOR ZALIAH BINTI ABDULLAH 
-  **Student ID**: 2023466022  
 
-- **Name**: NUR AYUNI BINTI A-AZIZ 
-  **Student ID**: 2023261404  
+2. **Name**: NOR ZALIAH BINTI ABDULLAH 
+-  **Student ID**: 2023466022  
 
-- **Name**: NUR FASIHAH NAJWA BINTI MOHD ASRI
-  **Student ID**: 2023213382  
+
+3. **Name**: NUR AYUNI BINTI A-AZIZ 
+-  **Student ID**: 2023261404  
+
+
+4. **Name**: NUR FASIHAH NAJWA BINTI MOHD ASRI
+-  **Student ID**: 2023213382  
 
 ---
 
@@ -69,58 +72,74 @@ The app features data synchronization with the cloud, enabling users to backup t
 #### Clone the Repository:
 
 1. Clone the repository:
+   
    git clone https://github.com/Qylahrzk/moneyflow-invention.git
    cd moneyflow-invention
 
 2. Install Flutter: You can follow the official Flutter installation guide for your operating system.
 
 3. Install Dependencies:
+   
    flutter pub get
 
 4. Open the Project in VS Code:
+   
    code .
 
 #### Git Workflow for Project Development
 1. Check Git Status- Before making any changes, check the status of your repository to see the current state of files:
+   
    git status
 
 2. Make Changes and Add Files:
+   
    git add .
 
 3. This stages all modified files for the next commit. You can also add specific files if needed, e.g.:
+   
    git add filename.dart
 
 4. Commit Your Changes:
+   
    git commit -m "Describe your changes here"
 
 5. Pull Latest Changes:
+   
    git pull origin main
 
 6. Push Your Changes to the remote repository:
+   
    git push origin main
 
 7. Creating and Switching Branches:
+   
    git checkout -b feature-branch
 
 8. If you want to switch to an existing branch:
+   
    git checkout branch-name
 
 9. Push a New Branch:
+   
    git push --set-upstream origin feature-branch
 
 10. Fetch Latest Changes from the remote repository without merging them:
+   
     git fetch
 
 11. If there are merge conflicts when pulling, open the conflicting files, resolve the conflicts, then add and commit the changes:
+   
     git add resolved-file.dart
     git commit -m "Resolved merge conflict"
     git push origin main
 
 #### Additional Git Commands
 1. If you added files by mistake, unstage them with:
+   
    git reset filename.dart
 
 2. If you want to discard local changes and revert a file to its last committed state, use:
+   
    git checkout -- filename.dart
 
-# For a detailed discussion, please refer to the report.
+### For a detailed discussion, please refer to the report.
