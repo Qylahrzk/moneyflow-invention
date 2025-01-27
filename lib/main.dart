@@ -9,12 +9,11 @@ import 'package:moneyflow/screens/edit_profile_screen.dart';
 import 'package:moneyflow/screens/settings_screen.dart';
 import 'package:moneyflow/screens/signup_screen.dart';
 import 'package:moneyflow/screens/budget_tracking_screen.dart';
-import 'package:moneyflow/screens/security_screen.dart'; // New route for Security
-
+import 'package:moneyflow/screens/security_screen.dart';
+import 'package:moneyflow/screens/spending_insights_screen.dart'; // New route for Security
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   // Initialize Hive and open necessary boxes
   await Hive.initFlutter();
@@ -22,30 +21,24 @@ void main() async {
   await Hive.openBox('user');
   await Hive.openBox('settings');
 
-
   runApp(const MoneyFlowApp());
 }
 
-
 class MoneyFlowApp extends StatelessWidget {
   const MoneyFlowApp({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     final settingsBox = Hive.box('settings');
     bool isDarkMode = settingsBox.get('darkMode', defaultValue: false);
 
-
     final userBox = Hive.box('user');
     bool isLoggedIn = userBox.containsKey('email');
-
 
     return ValueListenableBuilder(
       valueListenable: settingsBox.listenable(),
       builder: (context, box, child) {
         isDarkMode = box.get('darkMode', defaultValue: false);
-
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -82,34 +75,29 @@ class MoneyFlowApp extends StatelessWidget {
   }
 }
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
 
   @override
   // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-
 
   final List<Widget> _pages = [
     const LogExpensesScreen(),
     const BudgetTrackingScreen(expensesByCategory: {}, budgets: {}, totalBudget: 0.0, totalExpenses: 0.0,),
+    const SpendingInsightsScreen(), // New Spending Insights screen
     const AccountScreen(),
   ];
-
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,14 +108,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ? 'MoneyFlow - Expenses'
               : _selectedIndex == 1
                   ? 'Budget Tracking'
-                  : 'Account',
+                  : _selectedIndex == 2
+                      ? 'Spending Insight'
+                      : 'Account',
         ),
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.yellow,
+        selectedItemColor: Colors.purpleAccent, // Highlight selected icon
+        unselectedItemColor: Colors.grey,      // Dim unselected icons
+        backgroundColor: Colors.white,         // Ensure it stands out (or Colors.black in dark mode)
+        elevation: 10.0,                        // Add shadow for separation
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.attach_money),
@@ -138,6 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Budget Tracking',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.insights),
+            label: 'Insights',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Account',
           ),
@@ -146,4 +143,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
